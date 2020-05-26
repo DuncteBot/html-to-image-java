@@ -35,9 +35,16 @@ public class HtmlToImage {
             .createCompatibleImage(width, height);
 
         final JEditorPane pane = new JEditorPane("text/html", html);
+        final Graphics2D graphics = image.createGraphics();
+
+        graphics.setBackground(new Color(0f, 1f, 0f, .5f));
+//        graphics.setBackground(null);
 
         pane.setSize(width, height);
-        pane.print(image.createGraphics());
+        pane.setOpaque(false);
+        pane.setBorder(BorderFactory.createEmptyBorder());
+        pane.setBackground(new Color(1f, 0f, 0f, .5f));
+        pane.print(graphics);
 
         try (final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             ImageIO.write(image, "png", baos);

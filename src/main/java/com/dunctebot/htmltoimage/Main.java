@@ -22,19 +22,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
-import static com.dunctebot.htmltoimage.HtmlToImage.htmlToPng;
-import static com.dunctebot.htmltoimage.HtmlToImage.htmlToPngBytes;
+import com.dunctebot.htmltoimage.HtmlToImage;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        final byte[] bytes = htmlToPngBytes("<h1 style=\"background: green;\">hello world</h1>", 200, 200);
+        final byte[] bytes = HtmlToImage.htmlToPngBytes("<h1 style=\"background: green;\">hello world</h1>", 200, 200);
 
         try (FileOutputStream stream = new FileOutputStream(new File("image.png"))) {
             stream.write(bytes);
         }
 
-        final InputStream inStream = htmlToPng("<h1 style=\"background: yellow;\">hello world</h1>", 200, 200);
+        final InputStream inStream = HtmlToImage.htmlToPng(
+            "<style>" +
+                "body {" +
+                "background: orange;" +
+                "}" +
+                "</style>" +
+                "<h1 style=\"background: yellow;\">hello world</h1>",
+            200,
+            200
+        );
 
         Files.copy(
             inStream,

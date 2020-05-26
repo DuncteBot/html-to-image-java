@@ -18,8 +18,8 @@ plugins {
     java
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "com.dunctebot"
+version = "0.1.0-ALPHA"
 
 repositories {
     jcenter()
